@@ -55,7 +55,7 @@ try {
   $mail->Host       = 'smtp.hostinger.com';
   $mail->SMTPAuth   = true;
   $mail->Username   = 'produccion@isiselinor.com';
-  $mail->Password   = getenv('SMTP_PASS') ?: 'TU_CONTRASEÑA'; // ← poné tu contraseña o una variable de entorno
+  $mail->Password   = getenv('SMTP_PASS') ?: 'K6$sR7vKMu3zvAE'; // ← poné tu contraseña o una variable de entorno
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // ssl
   $mail->Port       = 465;
   $mail->CharSet    = 'UTF-8';
