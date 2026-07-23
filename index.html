@@ -199,26 +199,90 @@
   .step h3 { font-size: 20px; margin-top: 4px; }
   .step p { margin: 0; font-size: 14.5px; color: var(--tinta); line-height: 1.55; }
 
-  /* experiencia */
+  /* experiencia — acordeón */
   .exp-list { margin-top: 44px; display: flex; flex-direction: column; }
-  .exp {
-    display: grid; grid-template-columns: 132px 1fr auto; gap: 24px; align-items: baseline;
-    padding: 24px 0; border-top: 1px solid var(--linea);
+  details.exp { border-top: 1px solid var(--linea); }
+  details.exp:last-child { border-bottom: 1px solid var(--linea); }
+  .exp > summary {
+    list-style: none; cursor: pointer;
+    display: grid; grid-template-columns: 132px 1fr auto 22px; gap: 24px; align-items: baseline;
+    padding: 22px 0; transition: background .15s ease;
   }
-  .exp:last-child { border-bottom: 1px solid var(--linea); }
+  .exp > summary::-webkit-details-marker { display: none; }
+  .exp > summary:hover .s-title { color: var(--dotc, var(--lila)); }
   .exp .yr { font-family: var(--mono); font-size: 13px; color: var(--gris); letter-spacing: 0.04em; }
-  .exp .role { min-width: 0; }
-  .exp .role h3 { font-size: 21px; line-height: 1.12; }
-  .exp .role .org { display: inline-flex; align-items: center; gap: 8px; font-family: var(--body); font-weight: 700; font-size: 14px; margin-top: 4px; }
-  .exp .role .org::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dotc, var(--lila)); }
-  .exp .role p { margin: 8px 0 0; font-size: 14.5px; color: var(--tinta); line-height: 1.5; max-width: 620px; }
-  .exp .place { font-family: var(--mono); font-size: 12px; color: var(--gris); white-space: nowrap; }
-  .exp:nth-child(6n+1) { --dotc: var(--lila); } .exp:nth-child(6n+1) .org { color: var(--lila); }
-  .exp:nth-child(6n+2) { --dotc: var(--jade); } .exp:nth-child(6n+2) .org { color: var(--jade); }
-  .exp:nth-child(6n+3) { --dotc: var(--mango); } .exp:nth-child(6n+3) .org { color: #cf8a1e; }
-  .exp:nth-child(6n+4) { --dotc: var(--coral); } .exp:nth-child(6n+4) .org { color: var(--coral); }
-  .exp:nth-child(6n+5) { --dotc: var(--lila); } .exp:nth-child(6n+5) .org { color: var(--lila); }
-  .exp:nth-child(6n) { --dotc: var(--jade); } .exp:nth-child(6n) .org { color: var(--jade); }
+  .exp .s-mid { min-width: 0; }
+  .exp .s-title { font-family: var(--heading); font-weight: 600; font-size: 21px; line-height: 1.14; transition: color .15s ease; }
+  .exp .org { display: inline-flex; align-items: center; gap: 8px; font-family: var(--body); font-weight: 700; font-size: 14px; margin-top: 5px; }
+  .exp .org::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dotc, var(--lila)); }
+  .exp .place { font-family: var(--mono); font-size: 12px; color: var(--gris); white-space: nowrap; align-self: center; }
+  .exp .caret { align-self: center; width: 22px; height: 22px; color: var(--gris); transition: transform .25s ease, color .15s ease; }
+  .exp[open] .caret { transform: rotate(180deg); color: var(--dotc, var(--lila)); }
+  .exp .exp-body { overflow: hidden; }
+  .exp .exp-body p { margin: 0 0 24px; padding-left: 156px; font-size: 14.5px; color: var(--tinta); line-height: 1.55; max-width: 760px; }
+  .exp[open] .exp-body { animation: expReveal .28s ease; }
+  @keyframes expReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .exp:nth-child(7n+1) { --dotc: var(--lila); } .exp:nth-child(7n+1) .org { color: var(--lila); }
+  .exp:nth-child(7n+2) { --dotc: var(--jade); } .exp:nth-child(7n+2) .org { color: var(--jade); }
+  .exp:nth-child(7n+3) { --dotc: var(--mango); } .exp:nth-child(7n+3) .org { color: #cf8a1e; }
+  .exp:nth-child(7n+4) { --dotc: var(--coral); } .exp:nth-child(7n+4) .org { color: var(--coral); }
+  .exp:nth-child(7n+5) { --dotc: var(--lila); } .exp:nth-child(7n+5) .org { color: var(--lila); }
+  .exp:nth-child(7n+6) { --dotc: var(--jade); } .exp:nth-child(7n+6) .org { color: var(--jade); }
+  .exp:nth-child(7n) { --dotc: var(--coral); } .exp:nth-child(7n) .org { color: var(--coral); }
+
+  /* formación & certificaciones */
+  .cert-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin-top: 30px; }
+  @media (max-width: 720px) { .cert-grid { grid-template-columns: 1fr; } }
+  .cert {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--luz); border: 1px solid var(--linea); border-radius: 18px; padding: 22px 24px;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .cert:hover { transform: translateY(-3px); box-shadow: 0 26px 54px -40px rgba(36,29,26,0.35); }
+  .cert:nth-child(1) { border-left: 3px solid var(--lila); } .cert:nth-child(1):hover { border-color: var(--lila); }
+  .cert:nth-child(2) { border-left: 3px solid var(--jade); } .cert:nth-child(2):hover { border-color: var(--jade); }
+  .cert .c-ico { flex: none; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+  .cert:nth-child(1) .c-ico { background: var(--tint-lila); color: var(--lila); }
+  .cert:nth-child(2) .c-ico { background: var(--tint-jade); color: var(--jade); }
+  .cert h3 { font-size: 17px; line-height: 1.2; color: var(--noche); }
+  .cert .c-org { font-family: var(--body); font-weight: 700; font-size: 13.5px; color: var(--tinta); margin-top: 4px; }
+  .cert .c-meta { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em; color: var(--gris); margin-top: 6px; }
+
+  /* testimonios — carrusel */
+  .testi-wrap { background: var(--tint-lila); }
+  .testi-stage { margin-top: 40px; position: relative; }
+  .testi-viewport { overflow: hidden; }
+  .testi-track { display: flex; transition: transform .45s cubic-bezier(.4,0,.2,1); }
+  .testi {
+    flex: 0 0 100%; box-sizing: border-box; padding: 4px;
+  }
+  .testi-card {
+    background: var(--luz); border: 1px solid var(--linea); border-radius: 24px; padding: 40px 44px;
+  }
+  @media (max-width: 640px) { .testi-card { padding: 30px 26px; } }
+  .testi-mark { font-family: var(--heading); font-weight: 600; font-size: 60px; line-height: .6; color: var(--lila); opacity: .3; }
+  .testi-q { font-family: var(--heading); font-weight: 500; font-size: 22px; line-height: 1.42; color: var(--noche); margin: 14px 0 26px; text-wrap: pretty; }
+  @media (max-width: 640px) { .testi-q { font-size: 18px; } }
+  .testi-who { display: flex; align-items: center; gap: 14px; }
+  .testi-av { flex: none; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--heading); font-weight: 700; font-size: 17px; }
+  .testi-n { font-family: var(--heading); font-weight: 600; font-size: 16px; color: var(--noche); }
+  .testi-r { font-size: 13px; color: var(--gris); line-height: 1.35; margin-top: 2px; }
+  .testi-ctrls { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; }
+  .testi-dots { display: flex; gap: 8px; }
+  .testi-dots button { width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%; background: #d6cef0; cursor: pointer; transition: background .2s ease, transform .2s ease; }
+  .testi-dots button[aria-current="true"] { background: var(--lila); transform: scale(1.4); }
+  .testi-arrows { display: flex; gap: 10px; }
+  .testi-arrows button {
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--linea); background: var(--luz);
+    display: flex; align-items: center; justify-content: center; color: var(--noche); cursor: pointer;
+    transition: background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .testi-arrows button:hover { background: var(--lila); color: #fff; border-color: var(--lila); }
+  .testi-av.a1 { background: var(--tint-lila); color: var(--lila); }
+  .testi-av.a2 { background: var(--tint-jade); color: var(--jade); }
+  .testi-av.a3 { background: var(--tint-mango); color: #cf8a1e; }
+  .testi-av.a4 { background: #fbe0e0; color: var(--coral); }
+
   .award {
     display: inline-flex; align-items: center; gap: 10px; margin-top: 30px;
     background: var(--tint-mango); border: 1px solid #ecdcbe; color: var(--noche);
@@ -250,8 +314,11 @@
   .uni:nth-child(3) .uni-ico { background: var(--tint-mango); color: #cf8a1e; }
   .uni:nth-child(3):hover { border-color: var(--mango); } .uni:nth-child(3) .go { color: #cf8a1e; }
   @media (max-width: 720px) {
-    .exp { grid-template-columns: 1fr; gap: 6px; }
-    .exp .place { white-space: normal; }
+    .exp > summary { grid-template-columns: 1fr 22px; gap: 4px 12px; }
+    .exp .yr { grid-column: 1 / -1; order: -1; }
+    .exp .place { white-space: normal; grid-column: 1 / -1; }
+    .exp .caret { grid-column: 2; grid-row: 2; }
+    .exp .exp-body p { padding-left: 0; }
   }
 
   /* frase band */
@@ -328,6 +395,7 @@
     <a class="link" href="#proceso">Proceso</a>
     <a class="link" href="#experiencia">Experiencia</a>
     <a class="link" href="#universo">Universo</a>
+    <a class="link" href="#recomendaciones">Recomendaciones</a>
     <a class="link" href="#contacto">Contacto</a>
     <a class="btn btn-primary" href="https://wa.me/5491164136897" target="_blank" rel="noopener">Hablemos</a>
   </div>
@@ -449,73 +517,93 @@
     <div class="wrap">
       <div class="kicker-row"><span class="dotmark"></span><span class="mono-label">Experiencia</span></div>
       <h2 class="sec-title">Diez años poniendo ideas de pie.</h2>
-      <p class="sec-intro">Producción de eventos, festivales y audiovisual entre Venezuela y Argentina. Estos son los que más me marcaron.</p>
+      <p class="sec-intro">Producción de eventos, festivales y audiovisual entre Venezuela y Argentina. Tocá cada rol para ver el detalle.</p>
       <div class="exp-list">
-        <div class="exp">
-          <span class="yr">May 2025 — hoy</span>
-          <div class="role">
-            <h3>Project &amp; Tour Manager</h3>
-            <span class="org">Entr3t3nimiento</span>
-            <p>Monitoreo y auditoría con agentes de IA propios que detectan fallas y optimizan tiempos; flujos de trabajo sencillos que organizan el día a día de artistas y productores; y tour management de logística integral, con control probado y respuesta rápida ante imprevistos.</p>
-          </div>
-          <span class="place">Buenos Aires · Remoto</span>
-        </div>
-        <div class="exp">
-          <span class="yr">2018 — hoy</span>
-          <div class="role">
-            <h3>Coordinadora de comunicaciones &amp; productora</h3>
-            <span class="org">Habeatat</span>
-            <p>Comunicación, imagen y producción de la marca y sus artistas. Produje la Batalla de Maestros (BDM), la Final Nacional de la Red Bull Batalla de Gallos y el proyecto “Gotas” de Liana Malva hasta el Skoll World Forum.</p>
-          </div>
-          <span class="place">Caracas · Buenos Aires</span>
-        </div>
-        <div class="exp">
-          <span class="yr">2022 — hoy</span>
-          <div class="role">
-            <h3>Directora de proyecto</h3>
-            <span class="org">ExpoDeStickers</span>
-            <p>Lideré la reconceptualización del evento anual de diseñadores e ilustradores junto a Mao Orsini y Okso, hasta volverlo una referencia para creativos visuales.</p>
-          </div>
-          <span class="place">Caracas, VE</span>
-        </div>
-        <div class="exp">
-          <span class="yr">2024</span>
-          <div class="role">
-            <h3>Asesora de producción &amp; productora de campo</h3>
-            <span class="org">Festival Legado Latino</span>
-            <p>Riders técnicos, camerinos e itinerario de tarima de un festival de música: entradas y salidas al segundo y transiciones sin cortes entre artistas.</p>
-          </div>
-          <span class="place">Buenos Aires, AR</span>
-        </div>
-        <div class="exp">
-          <span class="yr">2021 — 2022</span>
-          <div class="role">
-            <h3>Productora de eventos</h3>
-            <span class="org">YM Produce y Comunica</span>
-            <p>Coordinación de 37 eventos —corporativos, showcases, ruedas de prensa y festivales de música— incluidos Sukha Festival, La Escuelita y Urbana.</p>
-          </div>
-          <span class="place">Caracas, VE</span>
-        </div>
-        <div class="exp">
-          <span class="yr">2019 — 2021</span>
-          <div class="role">
-            <h3>Facilitadora de Producción Audiovisual</h3>
-            <span class="org">Universidad Audiovisual de Venezuela</span>
-            <p>Convertí la cátedra en un laboratorio de experimentación: nuevas herramientas, formatos y narrativas para producir en un entorno multipantalla.</p>
-          </div>
-          <span class="place">Caracas, VE</span>
-        </div>
-        <div class="exp">
-          <span class="yr">2015 — 2017</span>
-          <div class="role">
-            <h3>Gerente de Producción audiovisual</h3>
-            <span class="org">Canal ConCiencia TV</span>
-            <p>Montaje, contratos y ejecución de proyectos audiovisuales. Dirigí el seriado “Lo Vital Hazlo Viral” y codirigí el unitario “EntreBits”.</p>
-          </div>
-          <span class="place">Caracas, VE</span>
-        </div>
+        <details class="exp" open>
+          <summary>
+            <span class="yr">May 2025 — hoy</span>
+            <span class="s-mid"><span class="s-title">Project &amp; Tour Manager</span><span class="org">Entr3t3nimiento</span></span>
+            <span class="place">Buenos Aires · Remoto</span>
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="exp-body"><p>Monitoreo y auditoría con agentes de IA propios que detectan fallas y optimizan tiempos; flujos de trabajo sencillos que organizan el día a día de artistas y productores; y tour management de logística integral, con control probado y respuesta rápida ante imprevistos.</p></div>
+        </details>
+        <details class="exp">
+          <summary>
+            <span class="yr">2018 — hoy</span>
+            <span class="s-mid"><span class="s-title">Coordinadora de comunicaciones &amp; productora</span><span class="org">Habeatat</span></span>
+            <span class="place">Caracas · Buenos Aires</span>
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="exp-body"><p>Comunicación, imagen y producción de la marca y sus artistas. Produje la Batalla de Maestros (BDM), la Final Nacional de la Red Bull Batalla de Gallos y el proyecto “Gotas” de Liana Malva hasta el Skoll World Forum.</p></div>
+        </details>
+        <details class="exp">
+          <summary>
+            <span class="yr">2022 — hoy</span>
+            <span class="s-mid"><span class="s-title">Directora de proyecto</span><span class="org">ExpoDeStickers</span></span>
+            <span class="place">Caracas, VE</span>
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="exp-body"><p>Lideré la reconceptualización del evento anual de diseñadores e ilustradores junto a Mao Orsini y Okso, hasta volverlo una referencia para creativos visuales.</p></div>
+        </details>
+        <details class="exp">
+          <summary>
+            <span class="yr">2024</span>
+            <span class="s-mid"><span class="s-title">Asesora de producción &amp; productora de campo</span><span class="org">Festival Legado Latino</span></span>
+            <span class="place">Buenos Aires, AR</span>
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="exp-body"><p>Riders técnicos, camerinos e itinerario de tarima de un festival de música: entradas y salidas al segundo y transiciones sin cortes entre artistas.</p></div>
+        </details>
+        <details class="exp">
+          <summary>
+            <span class="yr">2021 — 2022</span>
+            <span class="s-mid"><span class="s-title">Productora de eventos</span><span class="org">YM Produce y Comunica</span></span>
+            <span class="place">Caracas, VE</span>
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="exp-body"><p>Coordinación de 37 eventos —corporativos, showcases, ruedas de prensa y festivales de música— incluidos Sukha Festival, La Escuelita y Urbana.</p></div>
+        </details>
+        <details class="exp">
+          <summary>
+            <span class="yr">2019 — 2021</span>
+            <span class="s-mid"><span class="s-title">Facilitadora de Producción Audiovisual</span><span class="org">Universidad Audiovisual de Venezuela</span></span>
+            <span class="place">Caracas, VE</span>
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="exp-body"><p>Convertí la cátedra en un laboratorio de experimentación: nuevas herramientas, formatos y narrativas para producir en un entorno multipantalla.</p></div>
+        </details>
+        <details class="exp">
+          <summary>
+            <span class="yr">2015 — 2017</span>
+            <span class="s-mid"><span class="s-title">Gerente de Producción audiovisual</span><span class="org">Canal ConCiencia TV</span></span>
+            <span class="place">Caracas, VE</span>
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="exp-body"><p>Montaje, contratos y ejecución de proyectos audiovisuales. Dirigí el seriado “Lo Vital Hazlo Viral” y codirigí el unitario “EntreBits”.</p></div>
+        </details>
       </div>
       <span class="award">🏆 <span>Ganadora <strong>Mejor Producción Innovadora</strong> · Premios TAL 2015, Montevideo</span></span>
+
+      <div class="kicker-row" style="margin-top:56px;"><span class="dotmark"></span><span class="mono-label">Formación &amp; certificaciones</span></div>
+      <div class="cert-grid">
+        <div class="cert">
+          <span class="c-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"></path></svg></span>
+          <div>
+            <h3>Licenciada en Artes Audiovisuales</h3>
+            <div class="c-org">Mención Producción</div>
+            <div class="c-meta">Título de grado</div>
+          </div>
+        </div>
+        <div class="cert">
+          <span class="c-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"></circle><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"></path></svg></span>
+          <div>
+            <h3>Diplomado en Gerencia de Marketing Digital</h3>
+            <div class="c-org">Instituto Internet</div>
+            <div class="c-meta">Expedición · may. 2019</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -551,6 +639,57 @@
     <div class="wrap">
       <p class="q">“Traduzco las ideas que ya tienes. Las mentes creativas no se controlan: se conectan.”</p>
       <p class="sig">— Isis Elinor · soy iniciadora ✳</p>
+    </div>
+  </section>
+
+  <section class="block testi-wrap" id="recomendaciones">
+    <div class="wrap">
+      <div class="kicker-row"><span class="dotmark"></span><span class="mono-label">Recomendaciones</span></div>
+      <h2 class="sec-title">Lo que dicen quienes trabajaron conmigo.</h2>
+      <p class="sec-intro">Recomendaciones reales de colegas y equipos, tomadas de LinkedIn.</p>
+      <div class="testi-stage">
+        <div class="testi-viewport">
+          <div class="testi-track" id="testiTrack">
+            <div class="testi"><div class="testi-card">
+              <div class="testi-mark">“</div>
+              <p class="testi-q">Su profunda comprensión de la producción creativa, combinada con su capacidad para transformar ideas abstractas en proyectos tangibles, ha sido fundamental para el éxito de grandes proyectos: seriados, conciertos, muestras de arte, cursos. Metódica, apasionada y creativa en partes iguales.</p>
+              <div class="testi-who"><span class="testi-av a1">SB</span><div><div class="testi-n">Sasha Briceño</div><div class="testi-r">Brand Strategist &amp; Creative Director · Co-Founder, Noodlesoup Studio</div></div></div>
+            </div></div>
+            <div class="testi"><div class="testi-card">
+              <div class="testi-mark">“</div>
+              <p class="testi-q">Isis es creativa, organizada y detallista. No se le escapa nada y siempre está innovando e investigando sobre las últimas tendencias. Tenerla en tu proyecto garantiza un producto bien realizado y la felicidad del equipo.</p>
+              <div class="testi-who"><span class="testi-av a2">BG</span><div><div class="testi-n">Belzhaid Garantón</div><div class="testi-r">Comunicadora Visual · Community Manager · Editora de Video</div></div></div>
+            </div></div>
+            <div class="testi"><div class="testi-card">
+              <div class="testi-mark">“</div>
+              <p class="testi-q">Isis es excelente productora audiovisual, una persona creativa y responsable. Sus proyectos tienen un sello original. Recomendada 100%.</p>
+              <div class="testi-who"><span class="testi-av a3">DG</span><div><div class="testi-n">Daniela García</div><div class="testi-r">Lcda. en Periodismo y Dirección Audiovisual</div></div></div>
+            </div></div>
+            <div class="testi"><div class="testi-card">
+              <div class="testi-mark">“</div>
+              <p class="testi-q">Isis es una excelente productora y profesional, pero sobre todo, una estupenda persona. Responsable, dedicada y detallista: siempre un gran apoyo en cada equipo de trabajo.</p>
+              <div class="testi-who"><span class="testi-av a4">AC</span><div><div class="testi-n">Adriana Castro</div><div class="testi-r">Lead Edición Online en Pampa Films</div></div></div>
+            </div></div>
+            <div class="testi"><div class="testi-card">
+              <div class="testi-mark">“</div>
+              <p class="testi-q">Isis Elinor es sinónimo de organización, perseverancia y proactividad; una trabajadora incansable que puede alcanzar cualquier objetivo. Si quieres en tu equipo a alguien que impulse, organice y lidere, debes contratar a Isis Elinor.</p>
+              <div class="testi-who"><span class="testi-av a1">JP</span><div><div class="testi-n">Juan Pablo Díaz Silva</div><div class="testi-r">Sociólogo e Investigador</div></div></div>
+            </div></div>
+            <div class="testi"><div class="testi-card">
+              <div class="testi-mark">“</div>
+              <p class="testi-q">Productora conocedora del mundo audiovisual multipantalla y multiplataforma. Excelentes capacidades creativas y organizativas. Para ConCiencia TV fue clave en el contenido “Cerefritos”, ganador del premio internacional TAL a mejor formato.</p>
+              <div class="testi-who"><span class="testi-av a2">GC</span><div><div class="testi-n">Gustavo Castillo Mascareño</div><div class="testi-r">Estrategia comunicacional · Contenidos TV y multiplataforma</div></div></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="testi-ctrls">
+          <div class="testi-dots" id="testiDots" role="tablist" aria-label="Elegir recomendación"></div>
+          <div class="testi-arrows">
+            <button type="button" id="testiPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button type="button" id="testiNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -600,6 +739,34 @@
     <span>traduce ideas creativas ✳</span>
   </div>
 </footer>
+
+<script>
+(function(){
+  var track = document.getElementById('testiTrack');
+  if (!track) return;
+  var slides = track.children, total = slides.length, i = 0;
+  var dotsWrap = document.getElementById('testiDots');
+  for (var d = 0; d < total; d++) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role','tab');
+    b.setAttribute('aria-label','Recomendación ' + (d+1));
+    (function(n){ b.addEventListener('click', function(){ go(n); }); })(d);
+    dotsWrap.appendChild(b);
+  }
+  var dots = dotsWrap.children;
+  function render(){
+    track.style.transform = 'translateX(' + (-i * 100) + '%)';
+    for (var k = 0; k < total; k++) dots[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+  }
+  function go(n){ i = (n + total) % total; render(); }
+  document.getElementById('testiPrev').addEventListener('click', function(){ go(i-1); stop(); });
+  document.getElementById('testiNext').addEventListener('click', function(){ go(i+1); stop(); });
+  var timer = setInterval(function(){ go(i+1); }, 6500);
+  function stop(){ clearInterval(timer); }
+  track.closest('.testi-stage').addEventListener('mouseenter', stop);
+  render();
+})();
+</script>
 
 </body>
 </html>
