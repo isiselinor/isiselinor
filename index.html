@@ -126,7 +126,7 @@
   }
   .anat-figura img { height: 100%; width: auto; display: block; }
   .pin { position: absolute; width: 232px; z-index: 2; }
-  .pin .pin-n { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; color: var(--mango); }
+  .pin .pin-n { font-family: var(--mono); font-size: 16px; font-weight: 600; letter-spacing: 0.1em; color: var(--mango); }
   .pin .pin-t { display: block; font-family: var(--heading); font-weight: 600; font-size: 18px; color: var(--noche); margin-top: 2px; }
   .pin .pin-d { display: block; font-size: 13px; color: var(--tinta); line-height: 1.42; margin-top: 4px; }
   .pin.l { text-align: right; }
@@ -306,6 +306,15 @@
   .foot-inner .fbrand span { font-family: var(--heading); font-weight: 600; font-size: 18px; color: var(--noche); }
 </style>
 </head>
+
+<template id="__bundler_thumbnail" data-bg-color="#FBF6EE">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#FBF6EE"/>
+    <text x="600" y="380" font-family="Georgia, serif" font-weight="600" font-size="150" fill="#241D1A" text-anchor="middle">isis<tspan fill="#F0A93C">·</tspan>elinor</text>
+    <text x="600" y="470" font-family="monospace" font-size="34" letter-spacing="6" fill="#9C86D9" text-anchor="middle">PRODUCTORA CREATIVA</text>
+  </svg>
+</template>
+
 <body>
 
 <header class="nav">
@@ -329,11 +338,10 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-mark">
-        <span class="wordmark">isis<span class="dot">·</span>elinor</span>
       </div>
       <span class="pill">traduce ideas creativas ✳</span>
       <h1>El caos no es tu enemigo. <span class="g">Es tu materia prima.</span></h1>
-      <p class="lead">Soy Isis Elinor. Inicio, experimento, enseño y conecto: organizo mentes creativas —artistas, marcas y productoras— para que el desorden se vuelva movimiento y cada voz encuentre su lugar.</p>
+      <p class="lead">Soy Isis Elinor. organizo mentes creativas, para que el desorden se vuelva movimiento y cada voz encuentre su lugar. Inicio, experimento, enseño y conecto con artistas, marcas y productoras.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://wa.me/5491164136897" target="_blank" rel="noopener">Agendar una llamada</a>
         <a class="btn btn-ghost" href="#proceso">Conocer el proceso</a>
@@ -514,7 +522,7 @@
   <section class="block universo-wrap" id="universo">
     <div class="wrap">
       <div class="kicker-row k-rosa"><span class="dotmark"></span><span class="mono-label">Mi universo</span></div>
-      <h2 class="sec-title">Dónde más me vas a encontrar.</h2>
+      <h2 class="sec-title">Dónde más me puedes encontrar.</h2>
       <p class="sec-intro">Lo que escribo, lo que suena en mi cabeza y lo que ha salido al mundo. Pasa, curiosea, quédate.</p>
       <div class="uni-list">
         <a class="uni" href="https://substack.com/@isiselinor" target="_blank" rel="noopener">
@@ -551,7 +559,7 @@
       <div class="kicker-row k-rosa"><span class="dotmark"></span><span class="mono-label">Contacto</span></div>
       <div class="cont-grid">
         <div>
-          <h2>¿Empezamos a experimentar juntos?</h2>
+          <h2>Estructuremos juntos</h2>
           <p class="sec-intro">Cuéntame qué traes entre manos. Lo comunico, lo inicio, y luego te invito a experimentar conmigo.</p>
           <div class="cta-row" style="margin-top:26px; display:flex; flex-wrap:wrap; gap:14px;">
             <a class="btn btn-primary" href="https://wa.me/5491164136897" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
