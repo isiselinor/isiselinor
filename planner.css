@@ -1,0 +1,40 @@
+.oval{display:inline-block;border:1.2px solid var(--lead);border-radius:50%;padding:3px 12px}
+.calwrap{overflow-x:auto;margin-top:28px}
+#cal{display:grid;grid-template-columns:minmax(200px,1.5fr) repeat(7,minmax(0,1fr));border-top:var(--rule);border-left:1px solid var(--hair);user-select:none;touch-action:none;min-width:980px}
+.hd{padding:10px 8px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center}
+.hd .oval{font:700 10px/1.2 var(--font-mono);letter-spacing:.12em}
+#margin{grid-row:2/span 5;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);position:relative;background:var(--soft);min-height:620px}
+#margin .t{position:absolute;left:12px;top:10px}
+.day{position:relative;min-height:128px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:22px 6px 8px;transition:background .15s}
+.day .n{position:absolute;top:6px;right:8px;font:400 11px/1 var(--font-mono);color:var(--mute)}
+.day.out{background:linear-gradient(to top right,transparent calc(50% - .6px),var(--hair) 50%,transparent calc(50% + .6px))}
+.day.out .n{opacity:.5}
+.day.over{background:var(--lilac-100)}
+.day.closed{background:linear-gradient(to top right,transparent calc(50% - .8px),var(--lead) 50%,transparent calc(50% + .8px))}
+.day.today .n{background:var(--ink);color:#fff;padding:3px 5px;top:3px;right:5px}
+.list{display:flex;flex-direction:column;gap:2px}
+.it{touch-action:none;font:var(--text-planner);text-transform:uppercase;letter-spacing:.02em;color:var(--lead);cursor:grab;position:relative;display:flex;gap:5px;align-items:baseline}
+.it .u{flex:0 0 7px;width:7px;height:7px;border-radius:50%;transform:translateY(-1px)}
+.it .x{position:relative}
+#margin .it{position:absolute;width:170px;background:var(--tint,#fff);padding:9px 10px;box-shadow:var(--shadow-note);transform:rotate(var(--r));font-size:11px}
+.day .it{padding:2px}
+.day .it::before{content:"–";color:var(--mute)}
+.it.s-ok::after{content:"✓";color:var(--ok);font-size:13px;margin-left:2px}
+.it.s-done .x{text-decoration:line-through;text-decoration-color:var(--ink);text-decoration-thickness:1.5px;color:var(--mute)}
+.it.s-urg .x{outline:1.3px solid var(--red);outline-offset:1px;border-radius:40%/50%;padding:0 3px}
+.it.drag{position:fixed!important;z-index:999;cursor:grabbing;pointer-events:none;background:#fff;padding:9px 10px;box-shadow:var(--shadow-lift);width:170px}
+.meter{height:3px;background:var(--hair);position:relative;overflow:hidden}
+.meter i{position:absolute;inset:0 auto 0 0;background:var(--mc,var(--red));transition:background .4s,width:0;transition:width .5s var(--ease-out)}
+#done{max-height:0;overflow:hidden;transition:max-height .7s ease}
+#done.show{max-height:400px}
+.legend{display:flex;gap:22px;flex-wrap:wrap;align-items:center;padding:14px 0;color:var(--lead)}
+.legend span,.legend .mu{white-space:nowrap}
+.legend span{display:inline-flex;gap:8px;align-items:center}
+
+/* invitación a mover */
+@keyframes nudge{0%,100%{transform:rotate(var(--r)) translate(0,0)}25%{transform:rotate(calc(var(--r) - 1.2deg)) translate(-1px,-2px)}75%{transform:rotate(calc(var(--r) + 1.2deg)) translate(1px,-1px)}}
+#margin .it{animation:nudge 3.2s ease-in-out infinite;animation-delay:calc(var(--i,0) * -.37s)}
+#margin .it:hover{animation:none;transform:rotate(var(--r)) translateY(-4px);box-shadow:var(--shadow-lift);cursor:grab}
+#margin .t::after{content:" ↔ arrástralos";color:var(--lilac-700);font-weight:400;letter-spacing:.04em;text-transform:none}
+@media (prefers-reduced-motion:reduce){#margin .it{animation:none}}
+html[lang=en] #margin .t::after{content:" ↔ drag them"}
