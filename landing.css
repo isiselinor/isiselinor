@@ -345,3 +345,8 @@ html,body{overflow-x:clip}
 .bq-sig{display:flex;gap:16px;align-items:center}
 .bq-f{text-wrap:wrap}.bq-sig .mu{white-space:nowrap}.bq-f>.m{flex:1 1 260px;text-align:right}
 @media (max-width:560px){.bq-f>.m{text-align:left}}
+
+/* foto completa sin cortar */
+.anat .fig .zoom{height:100%;width:auto;max-width:none;aspect-ratio:1080/1620;margin:0 auto}
+.anat .fig .zoom img{width:100%;height:100%;object-fit:contain}
+@media (max-width:860px){.anat .fig{height:min(96vw,440px)}}

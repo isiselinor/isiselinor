@@ -18,14 +18,15 @@ pins.forEach(p=>p.classList.toggle('on',allOn||+p.dataset.k===k));hs.forEach(d=>
 A.classList.toggle('focus',!allOn&&k>0);[...tabs.children].forEach(b=>b.classList.toggle('on',+b.dataset.k===k));
 frame(allOn?0:k);
 st.textContent=allOn?'6 de 6 — así trabaja una productora.':k?'0'+k+' · '+W[k]:'Toca uno para verlo de cerca';all.textContent=allOn?'Uno por uno':'Todos a la vez';
+if(!k){document.getElementById('mN').textContent='— / 06';document.getElementById('mWhere').textContent='';document.getElementById('mT').textContent='Seis músculos, un cuerpo.';document.getElementById('mD').textContent='Toca un número para ver de cerca dónde vive cada uno.';document.getElementById('mNext').textContent='Empezar →';}
 if(k){const p=pins[k-1];document.getElementById('mN').textContent='0'+k+' / 06';document.getElementById('mWhere').textContent=W[k];document.getElementById('mT').innerHTML=p.querySelector('.ti').innerHTML;document.getElementById('mD').textContent=p.querySelector('.de').textContent;document.getElementById('mNext').textContent=k===6?'Volver al 01 →':'Siguiente →';}}
 function sel(k){allOn=false;cur=(!mq.matches&&cur===k)?0:k;render();}
 pins.forEach(p=>{p.addEventListener('click',()=>sel(+p.dataset.k));p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(+p.dataset.k);}});});
 all.onclick=()=>{allOn=!allOn;cur=allOn?0:1;render();};
-document.getElementById('mPrev').onclick=()=>sel(cur<=1?6:cur-1);document.getElementById('mNext').onclick=()=>sel(cur>=6?1:cur+1);
+document.getElementById('mPrev').onclick=()=>sel(cur<=1?6:cur-1);document.getElementById('mNext').onclick=()=>sel(cur>=6?1:cur+1);document.getElementById('mPrev').onclick=()=>sel(cur<=1?6:cur-1);
 let sx=0;fig.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
 fig.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)sel(dx<0?(cur>=6?1:cur+1):(cur<=1?6:cur-1));});
-const sync=()=>{if(mq.matches&&!cur){cur=1;allOn=false;}render();};
+const sync=()=>render();
 mq.addEventListener('change',sync);if(img.complete)sync();else img.addEventListener('load',sync);
 new ResizeObserver(()=>render()).observe(fig);
 })();
